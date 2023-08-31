@@ -1,0 +1,30 @@
+#服务名称
+spring:
+  application:
+    name: micr-dataservice
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/youngfinance?useUnicode=true&characterEncoding=UTF-8&Timezone=GMT%2B8
+    username: root
+    password: 1234
+
+#设置mybatis
+mybatis:
+  mapper-locations: classpath:/mappers/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 设置dubbo
+dubbo:
+  registry:
+    address: zookeeper://localhost:2181
+  scan:
+    base-packages: com.youngfinance.dataservice.service
+  provider:
+    timeout: 50000 # 50s
+    retries: 0
+  application:
+    qos-enable: true
+    qos-port: 33333
