@@ -1,6 +1,7 @@
 package com.youngfinance.front.controller;
 
 import com.youngfinance.api.model.ProductInfo;
+import com.youngfinance.api.pojo.BidInfoProduct;
 import com.youngfinance.api.pojo.MultiProduct;
 import com.youngfinance.common.enums.RCode;
 import com.youngfinance.common.util.CommonUtil;
@@ -55,6 +56,25 @@ public class ProductController extends BaseController{
             }
         }else {
             result.setRCode(RCode.REQUEST_PRODUCT_TYPE_ERROR);
+        }
+        return result;
+    }
+
+    // 查询某个产品的详情与投资记录
+    @ApiOperation(value = "产品详情", notes = "查询某个产品的详细信息和5条投资记录")
+    @GetMapping("/product/info")
+    public RespResult queryProductDetail(@RequestParam("productId") Integer id) {
+        RespResult result = RespResult.fail();
+        if(id != null && id > 0) {
+            ProductInfo productInfo = productInfoSercvice.queryById(id);
+            if(productInfo != null) {
+                List<BidInfoProduct> bidInfoProducts = investService.queryBidListByProductId(id, 1, 5);
+                result = RespResult.ok();
+                result.setData(productInfo);
+                result.setList(bidInfoProducts);
+            } else {
+                result.setRCode(RCode.PRODUCT_OFFLINE_ERROR);
+            }
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package com.youngfinance.front.controller;
 
+import com.youngfinance.api.service.InvestService;
 import com.youngfinance.api.service.PlatBaseInfoService;
 import com.youngfinance.api.service.ProductInfoSercvice;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -18,4 +19,7 @@ public class BaseController {
 
     @DubboReference(interfaceClass = ProductInfoSercvice.class, version = "1.0")
     protected ProductInfoSercvice productInfoSercvice;
+
+    @DubboReference(interfaceClass = InvestService.class, version = "1.0")
+    protected InvestService investService;
 }

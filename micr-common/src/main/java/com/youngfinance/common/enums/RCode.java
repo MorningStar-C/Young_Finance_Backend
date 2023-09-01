@@ -5,6 +5,7 @@ public enum RCode {
     SUCCESS(1000, "请求成功"),
     REQUEST_PARAM_ERROR(1001, "请求参数有误"),
     REQUEST_PRODUCT_TYPE_ERROR(1002, "产品类型参数有误"),
+    PRODUCT_OFFLINE_ERROR(1003, "产品已经下线"),
 
     ;
     /**

@@ -33,7 +33,6 @@ public class ProductInfo implements Serializable {
 
     private String productDesc;
 
-    private Integer version;
 
     public Integer getId() {
         return id;
@@ -147,11 +146,4 @@ public class ProductInfo implements Serializable {
         this.productDesc = productDesc;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 }

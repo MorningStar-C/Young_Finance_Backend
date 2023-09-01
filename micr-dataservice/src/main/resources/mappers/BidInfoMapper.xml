@@ -21,6 +21,24 @@
     <select id="selectSumBidMoney" resultType="java.math.BigDecimal">
       select sum(bid_money) as sumBidMoney from b_bid_info
     </select>
+    <select id="selectByProductId" resultType="com.youngfinance.api.pojo.BidInfoProduct">
+      SELECT
+        bid.id,
+        concat(
+                SUBSTR( u.phone FROM 1 FOR 3 ),
+                "******",
+                SUBSTR( u.phone FROM 10 FOR 2 )) AS phone,
+        DATE_FORMAT( bid.bid_time, "%Y-%m-%d %H:%i:%s" ) AS bidTime,
+        bid.bid_money AS bidMoney
+      FROM
+        b_bid_info bid
+          JOIN u_user u ON bid.uid = u.id
+      WHERE
+        bid.prod_id = #{productId}
+      ORDER BY
+        bid.bid_time DESC
+        LIMIT #{offset}, #{rows}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from b_bid_info
     where id = #{id,jdbcType=INTEGER}

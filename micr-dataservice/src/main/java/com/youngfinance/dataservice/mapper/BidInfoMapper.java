@@ -1,8 +1,11 @@
 package com.youngfinance.dataservice.mapper;
 
 import com.youngfinance.api.model.BidInfo;
+import com.youngfinance.api.pojo.BidInfoProduct;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface BidInfoMapper {
 
@@ -20,4 +23,7 @@ public interface BidInfoMapper {
     int updateByPrimaryKeySelective(BidInfo record);
 
     int updateByPrimaryKey(BidInfo record);
+
+    List<BidInfoProduct> selectByProductId(@Param("productId") Integer productId, @Param("offset") Integer offset, @Param("rows") Integer rows);
+
 }
