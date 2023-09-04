@@ -1,6 +1,7 @@
 package com.youngfinance.dataservice.mapper;
 
 import com.youngfinance.api.model.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
 
@@ -18,4 +19,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    User selectByPhone(@Param("phone") String phone);
 }
