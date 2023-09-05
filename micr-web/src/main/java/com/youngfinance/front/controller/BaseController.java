@@ -1,9 +1,6 @@
 package com.youngfinance.front.controller;
 
-import com.youngfinance.api.service.InvestService;
-import com.youngfinance.api.service.PlatBaseInfoService;
-import com.youngfinance.api.service.ProductInfoSercvice;
-import com.youngfinance.api.service.UserService;
+import com.youngfinance.api.service.*;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,4 +23,7 @@ public class BaseController {
 
     @DubboReference(interfaceClass = UserService.class, version = "1.0")
     protected UserService userService;
+
+    @DubboReference(interfaceClass = SmsService.class, version = "1.0")
+    protected SmsService smsService;
 }

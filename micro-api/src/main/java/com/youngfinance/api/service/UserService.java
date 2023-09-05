@@ -6,4 +6,6 @@ public interface UserService {
 
     // 判断手机号是否存在
     User queryByPhone(String phone);
+
+    int userRegister(String phone, String password);
 }

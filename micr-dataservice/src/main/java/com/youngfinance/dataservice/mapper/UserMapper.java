@@ -21,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByPhone(@Param("phone") String phone);
+
+    int insertReturnPrimaryKey(User user);
 }

@@ -7,7 +7,9 @@ public enum RCode {
     REQUEST_PRODUCT_TYPE_ERROR(1002, "产品类型参数有误"),
     PRODUCT_OFFLINE_ERROR(1003, "产品已经下线"),
     PHONE_FORMAT_ERROR(1004, "手机号格式不正确"),
-    PHONE_EXISTS(1005, "手机号已注册")
+    PHONE_EXISTS(1005, "手机号已注册"),
+    SMS_CODE_EXISTS(1006, "验证码可以继续使用"),
+    SMS_CODE_INVALID(1007, "验证码无效")
 
     ;
     /**

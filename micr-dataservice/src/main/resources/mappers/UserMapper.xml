@@ -94,6 +94,14 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertReturnPrimaryKey">
+    insert into u_user(phone, login_password, add_time)
+    values (#{phone}, #{loginPassword}, #{addTime})
+
+    <selectKey keyColumn="newId" keyProperty="id" resultType="int" order="AFTER">
+      select LAST_INSERT_ID() as newId
+    </selectKey>
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.youngfinance.api.model.User">
     update u_user
     <set>

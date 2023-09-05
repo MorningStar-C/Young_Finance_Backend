@@ -28,3 +28,8 @@ dubbo:
   application:
     qos-enable: true
     qos-port: 33333
+
+# 密码加盐
+youngFinance:
+  config:
+    salt: fisahvcdskncskcncd5465dsef32vdfs
