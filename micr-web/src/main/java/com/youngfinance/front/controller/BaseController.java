@@ -24,6 +24,9 @@ public class BaseController {
     @DubboReference(interfaceClass = UserService.class, version = "1.0")
     protected UserService userService;
 
-    @DubboReference(interfaceClass = SmsService.class, version = "1.0")
-    protected SmsService smsService;
+    @DubboReference(interfaceClass = SmsService.class, version = "1.0", group = "register")
+    protected SmsService smsRegisterService;
+
+    @DubboReference(interfaceClass = SmsService.class, version = "1.0", group = "login")
+    protected SmsService smsLoginService;
 }

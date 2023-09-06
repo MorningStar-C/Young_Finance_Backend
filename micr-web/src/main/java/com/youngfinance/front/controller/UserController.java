@@ -9,7 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
-@Api("用户功能")
+@Api(tags = "用户功能")
 @RestController
 @RequestMapping("/v1/user")
 public class UserController extends BaseController{
@@ -23,7 +23,7 @@ public class UserController extends BaseController{
         if(CommonUtil.checkPhone(phone)) {
             if(pword != null && pword.length() == 32) {
                 // 检查短信验证码
-                if(smsService.checkSmsCode(phone, scode)) {
+                if(smsRegisterService.checkSmsCode(phone, scode)) {
                     // 注册
                     int registerResult = userService.userRegister(phone, pword);
                     if(registerResult == 1) {

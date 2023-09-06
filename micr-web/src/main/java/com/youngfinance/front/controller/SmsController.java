@@ -18,19 +18,40 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/v1/sms")
 public class SmsController extends BaseController{
-
     // 发送注册验证码短信
     @GetMapping("/code/register")
     public RespResult sendCodeRegister(@RequestParam String phone) {
         RespResult result = RespResult.fail();
         if(CommonUtil.checkPhone(phone)) {
             // 判断redis中是否有该手机号的验证码
-            String key = RedisKey.KEY_SMS_CODE + phone;
+            String key = RedisKey.KEY_SMS_CODE_REG + phone;
             if(stringRedisTemplate.hasKey(key)) {
                 result = RespResult.ok();
                 result.setRCode(RCode.SMS_CODE_EXISTS);
             } else {
-                boolean isSendSms = smsService.sendSms(phone, "test");
+                boolean isSendSms = smsRegisterService.sendSms(phone, "test");
+                if(isSendSms) {
+                    result = RespResult.ok();
+                }
+            }
+        } else {
+            result.setRCode(RCode.PHONE_FORMAT_ERROR);
+        }
+        return result;
+    }
+
+    // 发送登录验证码短信
+    @GetMapping("/code/login")
+    public RespResult sendCodeLogin(@RequestParam String phone) {
+        RespResult result = RespResult.fail();
+        if(CommonUtil.checkPhone(phone)) {
+            // 判断redis中是否有该手机号的验证码
+            String key = RedisKey.KEY_SMS_CODE_LOGIN + phone;
+            if(stringRedisTemplate.hasKey(key)) {
+                result = RespResult.ok();
+                result.setRCode(RCode.SMS_CODE_EXISTS);
+            } else {
+                boolean isSendSms = smsLoginService.sendSms(phone, "test");
                 if(isSendSms) {
                     result = RespResult.ok();
                 }

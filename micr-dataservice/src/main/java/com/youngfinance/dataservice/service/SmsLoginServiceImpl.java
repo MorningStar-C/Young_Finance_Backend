@@ -1,7 +1,6 @@
 package com.youngfinance.dataservice.service;
 
 import com.youngfinance.api.service.SmsService;
-
 import com.youngfinance.common.constants.RedisKey;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -10,8 +9,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
-@DubboService(interfaceClass = SmsService.class, version = "1.0")
-public class SmsServiceImpl implements SmsService {
+@DubboService(interfaceClass = SmsService.class, version = "1.0", group = "login")
+public class SmsLoginServiceImpl implements SmsService {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -23,9 +22,9 @@ public class SmsServiceImpl implements SmsService {
         boolean flag = false;
         if(code != null) {
 
-            String key = RedisKey.KEY_SMS_CODE + phone;
+            String key = RedisKey.KEY_SMS_CODE_LOGIN + phone;
             stringRedisTemplate.boundValueOps(key).set(code, 3, TimeUnit.MINUTES);
-            System.out.println("验证码：" + stringRedisTemplate.boundValueOps(key).get());
+            System.out.println("登录验证码：" + stringRedisTemplate.boundValueOps(key).get());
             flag = true;
         }
 
@@ -34,7 +33,7 @@ public class SmsServiceImpl implements SmsService {
 
     @Override
     public boolean checkSmsCode(String phone, String code) {
-        String key = RedisKey.KEY_SMS_CODE + phone;
+        String key = RedisKey.KEY_SMS_CODE_LOGIN + phone;
         if(stringRedisTemplate.hasKey(key)) {
             String querySmsCode = stringRedisTemplate.boundValueOps(key).get();
             if(code.equals(querySmsCode)) {
