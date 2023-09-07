@@ -27,7 +27,11 @@
       select <include refid="Base_Column_List"></include>
       from u_user where phone = #{phone}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectLogin" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from u_user where phone = #{phone} and login_password = #{loginPassword}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from u_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -139,5 +143,8 @@
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       header_image = #{headerImage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateRealName">
+    update u_user set name=#{name}, id_card=#{idCard} where phone = #{phone}
   </update>
 </mapper>

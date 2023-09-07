@@ -8,4 +8,8 @@ public interface UserService {
     User queryByPhone(String phone);
 
     int userRegister(String phone, String password);
+
+    User userLogin(String phone, String pword);
+
+    boolean modifyRealName(String phone, String name, String idCard);
 }

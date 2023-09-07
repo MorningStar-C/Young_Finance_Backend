@@ -20,6 +20,9 @@ public class RespResult {
 
     private PageInfo page;
 
+    // 访问token
+    private String accessToken;
+
     // 单个数据
     private Object data;
 
@@ -59,6 +62,13 @@ public class RespResult {
         this.msg = rcode.getMsg();
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public int getCode() {
         return code;

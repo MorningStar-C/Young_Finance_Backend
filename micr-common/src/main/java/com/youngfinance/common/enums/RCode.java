@@ -9,7 +9,9 @@ public enum RCode {
     PHONE_FORMAT_ERROR(1004, "手机号格式不正确"),
     PHONE_EXISTS(1005, "手机号已注册"),
     SMS_CODE_EXISTS(1006, "验证码可以继续使用"),
-    SMS_CODE_INVALID(1007, "验证码无效")
+    SMS_CODE_INVALID(1007, "验证码无效"),
+    PHONE_LOGIN_PASSWORD_INVALID(1008, "手机号或密码无效"),
+    REALNAME_FAILED(1009, "实名认证无效"),
 
     ;
     /**

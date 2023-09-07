@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.youngfinance.dataservice.mapper")
 @SpringBootApplication
 public class MicrDataserviceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MicrDataserviceApplication.class, args);
     }

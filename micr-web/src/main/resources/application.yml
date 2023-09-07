@@ -28,4 +28,6 @@ dubbo:
     timeout: 50000
     retries: 0
 
+jwt:
+  secret: fa8b00d4c8964aa29b427a8109bb9a35
 

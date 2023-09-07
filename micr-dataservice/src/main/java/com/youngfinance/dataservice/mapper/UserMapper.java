@@ -23,4 +23,8 @@ public interface UserMapper {
     User selectByPhone(@Param("phone") String phone);
 
     int insertReturnPrimaryKey(User user);
+
+    User selectLogin(@Param("phone") String phone, @Param("loginPassword") String newPassword);
+
+    int updateRealName(@Param("phone") String phone, @Param("name") String name, @Param("idCard") String idCard);
 }

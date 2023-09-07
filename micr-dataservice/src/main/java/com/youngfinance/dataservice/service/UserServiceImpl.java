@@ -6,6 +6,7 @@ import com.youngfinance.api.service.UserService;
 import com.youngfinance.common.util.CommonUtil;
 import com.youngfinance.dataservice.mapper.FinanceAccountMapper;
 import com.youngfinance.dataservice.mapper.UserMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.MD5Utils;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,5 +69,30 @@ public class UserServiceImpl implements UserService {
 
         }
         return result;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public User userLogin(String phone, String password) {
+        User user = null;
+        if(CommonUtil.checkPhone(phone) && (password != null && password.length() == 32)) {
+            String newPassword = DigestUtils.md5DigestAsHex((password + salt).getBytes(StandardCharsets.UTF_8));
+            user = userMapper.selectLogin(phone, newPassword);
+            // 更新最后的登陆时间
+            if(user != null) {
+                user.setLastLoginTime(new Date());
+                userMapper.updateByPrimaryKeySelective(user);
+            }
+        }
+        return user;
+    }
+
+    @Override
+    public boolean modifyRealName(String phone, String name, String idCard) {
+        int rows = 0;
+        if(!StringUtils.isAnyBlank(phone, name, idCard)) {
+            rows = userMapper.updateRealName(phone, name, idCard);
+        }
+        return rows > 0;
     }
 }
